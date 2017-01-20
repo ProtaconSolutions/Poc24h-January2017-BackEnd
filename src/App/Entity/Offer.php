@@ -9,11 +9,10 @@ namespace App\Entity;
 
 use App\Doctrine\Behaviours as ORMBehaviors;
 use App\Entity\Interfaces\EntityInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Offer
@@ -36,15 +35,13 @@ use Ramsey\Uuid\Uuid;
  * @package App\Entity
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-class Offer
+class Offer implements EntityInterface
 {
     // Traits
     use ORMBehaviors\Blameable;
     use ORMBehaviors\Timestampable;
 
     /**
-     * Offer ID.
-     *
      * @var string
      *
      * @JMS\Groups({
@@ -73,6 +70,8 @@ class Offer
      *  })
      * @JMS\Type("App\Entity\Workshop")
      *
+     * @Assert\NotNull()
+     *
      * @ORM\ManyToOne(
      *      targetEntity="App\Entity\Workshop",
      *      inversedBy="offers",
@@ -89,8 +88,6 @@ class Offer
     private $workshop;
 
     /**
-     * Car brand name.
-     *
      * @var string
      *
      * @JMS\Groups({
@@ -99,6 +96,12 @@ class Offer
      *      "Offer.name",
      *  })
      * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      max = 255,
+     *  )
      *
      * @ORM\Column(
      *      name="name",
@@ -124,7 +127,7 @@ class Offer
      * @ORM\Column(
      *      name="description",
      *      type="text",
-     *      nullable=false,
+     *      nullable=true,
      *  )
      */
     private $description;
@@ -146,6 +149,14 @@ class Offer
      *  )
      */
     private $price = 0;
+
+    /**
+     * Offer constructor.
+     */
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4()->toString();
+    }
 
     /**
      * @return string

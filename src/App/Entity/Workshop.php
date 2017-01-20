@@ -14,9 +14,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Author
+ * Class Workshop
  *
  * @ORM\Table(
  *      name="workshop",
@@ -42,8 +43,6 @@ class Workshop implements EntityInterface
     use ORMBehaviors\Timestampable;
 
     /**
-     * Car brand ID.
-     *
      * @var string
      *
      * @JMS\Groups({
@@ -63,8 +62,6 @@ class Workshop implements EntityInterface
     private $id;
 
     /**
-     * Car brand name.
-     *
      * @var string
      *
      * @JMS\Groups({
@@ -73,6 +70,12 @@ class Workshop implements EntityInterface
      *      "Workshop.name",
      *  })
      * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      max = 255,
+     *  )
      *
      * @ORM\Column(
      *      name="name",
@@ -84,8 +87,6 @@ class Workshop implements EntityInterface
     private $name;
 
     /**
-     * Author description.
-     *
      * @var string
      *
      * @JMS\Groups({
@@ -98,7 +99,7 @@ class Workshop implements EntityInterface
      * @ORM\Column(
      *      name="description",
      *      type="text",
-     *      nullable=false,
+     *      nullable=true,
      *  )
      */
     private $description;
