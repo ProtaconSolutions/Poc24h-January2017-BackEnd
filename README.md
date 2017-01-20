@@ -74,9 +74,12 @@ $ php composer.phar install
 Note that this will also ask you some environment settings; db, mail, secrets, jwt, etc.
 
 ## Environment checks
-You need to check that your environment is ready to use this application in CLI and WEB mode.
-First step is to make sure that ```var``` directory permissions are set right. Instructions 
-for this can be found [here](http://symfony.com/doc/current/book/installation.html#book-installation-permissions).
+
+```bash
+$ HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+$ setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+$ setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var
+```
 
 ## CLI
 Open terminal and go to project root directory and run following command.
