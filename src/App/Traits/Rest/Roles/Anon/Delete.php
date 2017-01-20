@@ -1,57 +1,62 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Traits/Rest/Roles/User/Create.php
+ * /src/App/Traits/Rest/Roles/User/Delete.php
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-namespace App\Traits\Rest\Roles\User;
+namespace App\Traits\Rest\Roles\Anon;
 
-use App\Traits\Rest\Methods\Create as CreateMethod;
+use App\Traits\Rest\Methods\Delete as DeleteMethod;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
- * Trait to add 'Create' action for REST resources for 'anonymous' users.
+ * Trait to add 'Delete' action for REST resources for 'anonymous' users.
  *
- * @see \App\Traits\Rest\Methods\Create for detailed documents.
+ * @see \App\Traits\Rest\Methods\Delete for detailed documents.
  *
  * @package App\Traits\Rest
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-trait Create
+trait Delete
 {
-    use CreateMethod;
+    use DeleteMethod;
 
     /**
-     * Create action for current resource.
+     * Delete action for current resource.
      *
-     * @Route("")
-     * @Route("/")
+     * @Route(
+     *      "/{id}",
+     *      requirements={
+     *          "id" = "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+     *      }
+     *  )
      *
-     * @Method({"POST"})
+     * @Method({"DELETE"})
      *
-     * @throws  \UnexpectedValueException
      * @throws  \LogicException
      * @throws  \InvalidArgumentException
+     * @throws  \UnexpectedValueException
      * @throws  OptimisticLockException
      * @throws  ORMInvalidArgumentException
-     * @throws  ValidatorException
+     * @throws  HttpException
      * @throws  MethodNotAllowedHttpException
      *
      * @param   Request $request
+     * @param   string  $id
      *
      * @return  Response
      */
-    public function create(Request $request): Response
+    public function delete(Request $request, string $id): Response
     {
-        return $this->createMethod($request);
+        return $this->deleteMethod($request, $id);
     }
 }

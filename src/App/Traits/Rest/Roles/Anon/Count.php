@@ -5,7 +5,7 @@ declare(strict_types=1);
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-namespace App\Traits\Rest\Roles\User;
+namespace App\Traits\Rest\Roles\Anon;
 
 use App\Traits\Rest\Methods\Count as CountMethod;
 use Doctrine\ORM\NonUniqueResultException;

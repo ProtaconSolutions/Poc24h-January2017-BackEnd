@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Traits/Rest/Roles/User/Delete.php
+ * /src/App/Traits/Rest/Roles/User/FindOne.php
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-namespace App\Traits\Rest\Roles\User;
+namespace App\Traits\Rest\Roles\Anon;
 
-use App\Traits\Rest\Methods\Delete as DeleteMethod;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMInvalidArgumentException;
+use App\Traits\Rest\Methods\FindOne as FindOneMethod;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,19 +17,19 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Trait to add 'Delete' action for REST resources for 'anonymous' users.
+ * Trait to add 'FindOne' action for REST resources for 'anonymous' users.
  *
- * @see \App\Traits\Rest\Methods\Delete for detailed documents.
+ * @see \App\Traits\Rest\Methods\FindOne for detailed documents.
  *
  * @package App\Traits\Rest
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-trait Delete
+trait FindOne
 {
-    use DeleteMethod;
+    use FindOneMethod;
 
     /**
-     * Delete action for current resource.
+     * FindOne action for current resource.
      *
      * @Route(
      *      "/{id}",
@@ -40,13 +38,11 @@ trait Delete
      *      }
      *  )
      *
-     * @Method({"DELETE"})
+     * @Method({"GET"})
      *
+     * @throws  \UnexpectedValueException
      * @throws  \LogicException
      * @throws  \InvalidArgumentException
-     * @throws  \UnexpectedValueException
-     * @throws  OptimisticLockException
-     * @throws  ORMInvalidArgumentException
      * @throws  HttpException
      * @throws  MethodNotAllowedHttpException
      *
@@ -55,8 +51,8 @@ trait Delete
      *
      * @return  Response
      */
-    public function delete(Request $request, string $id): Response
+    public function findOne(Request $request, string $id): Response
     {
-        return $this->deleteMethod($request, $id);
+        return $this->findOneMethod($request, $id);
     }
 }

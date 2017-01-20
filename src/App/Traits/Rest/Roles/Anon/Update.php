@@ -1,13 +1,15 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Traits/Rest/Roles/User/FindOne.php
+ * /src/App/Traits/Rest/Roles/User/Update.php
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-namespace App\Traits\Rest\Roles\User;
+namespace App\Traits\Rest\Roles\Anon;
 
-use App\Traits\Rest\Methods\FindOne as FindOneMethod;
+use App\Traits\Rest\Methods\Update as UpdateMethod;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMInvalidArgumentException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,21 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
- * Trait to add 'FindOne' action for REST resources for 'anonymous' users.
+ * Trait to add 'Update' action for REST resources for 'anonymous' users.
  *
- * @see \App\Traits\Rest\Methods\FindOne for detailed documents.
+ * @see \App\Traits\Rest\Methods\Update for detailed documents.
  *
  * @package App\Traits\Rest
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-trait FindOne
+trait Update
 {
-    use FindOneMethod;
+    use UpdateMethod;
 
     /**
-     * FindOne action for current resource.
+     * Update action for current resource.
      *
      * @Route(
      *      "/{id}",
@@ -38,21 +41,24 @@ trait FindOne
      *      }
      *  )
      *
-     * @Method({"GET"})
+     * @Method({"PUT"})
      *
-     * @throws  \UnexpectedValueException
-     * @throws  \LogicException
      * @throws  \InvalidArgumentException
+     * @throws  \LogicException
+     * @throws  \UnexpectedValueException
+     * @throws  OptimisticLockException
+     * @throws  ORMInvalidArgumentException
      * @throws  HttpException
      * @throws  MethodNotAllowedHttpException
+     * @throws  ValidatorException
      *
      * @param   Request $request
      * @param   string  $id
      *
      * @return  Response
      */
-    public function findOne(Request $request, string $id): Response
+    public function update(Request $request, string $id): Response
     {
-        return $this->findOneMethod($request, $id);
+        return $this->updateMethod($request, $id);
     }
 }

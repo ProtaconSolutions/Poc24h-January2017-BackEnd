@@ -1,53 +1,57 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Traits/Rest/Roles/User/Find.php
+ * /src/App/Traits/Rest/Roles/User/Create.php
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-namespace App\Traits\Rest\Roles\User;
+namespace App\Traits\Rest\Roles\Anon;
 
-use App\Traits\Rest\Methods\Find as FindMethod;
+use App\Traits\Rest\Methods\Create as CreateMethod;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMInvalidArgumentException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
- * Trait to add 'Find' action for REST resources for 'anonymous' users.
+ * Trait to add 'Create' action for REST resources for 'anonymous' users.
  *
- * @see \App\Traits\Rest\Methods\Find for detailed documents.
+ * @see \App\Traits\Rest\Methods\Create for detailed documents.
  *
  * @package App\Traits\Rest
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-trait Find
+trait Create
 {
-    use FindMethod;
+    use CreateMethod;
 
     /**
-     * Find action for current resource.
+     * Create action for current resource.
      *
      * @Route("")
      * @Route("/")
      *
-     * @Method({"GET"})
+     * @Method({"POST"})
      *
      * @throws  \UnexpectedValueException
      * @throws  \LogicException
      * @throws  \InvalidArgumentException
-     * @throws  HttpException
+     * @throws  OptimisticLockException
+     * @throws  ORMInvalidArgumentException
+     * @throws  ValidatorException
      * @throws  MethodNotAllowedHttpException
      *
      * @param   Request $request
      *
      * @return  Response
      */
-    public function find(Request $request): Response
+    public function create(Request $request): Response
     {
-        return $this->findMethod($request);
+        return $this->createMethod($request);
     }
 }
