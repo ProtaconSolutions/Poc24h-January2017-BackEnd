@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Services/Rest/Service.php
+ * /src/App/Services/Rest/ServiceType.php
  *
  * @Book  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
 namespace App\Services\Rest;
 
-use App\Entity\Service as Entity;
-use App\Repository\Service as Repository;
+use App\Entity\ServiceType as Entity;
+use App\Repository\ServiceType as Repository;
 use Doctrine\Common\Persistence\Proxy;
 
 // Note that these are just for the class PHPDoc block
@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\Proxy;
 /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
 
 /**
- * Class Service
+ * Class ServiceType
  *
  * @package App\Services\Rest
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
@@ -31,7 +31,7 @@ use Doctrine\Common\Persistence\Proxy;
  * @method  Entity          update(string $id, \stdClass $data): Entity
  * @method  Entity          delete(string $id): Entity
  */
-class Service extends Base
+class ServiceType extends Base
 {
     // Implement custom service methods here
 }

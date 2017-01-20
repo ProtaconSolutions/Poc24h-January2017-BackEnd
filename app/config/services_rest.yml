@@ -15,9 +15,9 @@ services:
         class: App\Services\Rest\RequestLog
         arguments: [ '@repository.request_log', '@validator' ]
 
-    app.services.rest.service:
-        class: App\Services\Rest\Service
-        arguments: [ '@repository.service', '@validator' ]
+    app.services.rest.service_type:
+        class: App\Services\Rest\ServiceType
+        arguments: [ '@repository.service_type', '@validator' ]
 
     app.services.rest.user:
         class: App\Services\Rest\User

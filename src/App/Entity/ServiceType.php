@@ -17,10 +17,10 @@ use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Service
+ * Class ServiceType
  *
  * @ORM\Table(
- *      name="service",
+ *      name="service_type",
  *      indexes={
  *          @ORM\Index(name="created_by_id", columns={"created_by_id"}),
  *          @ORM\Index(name="updated_by_id", columns={"updated_by_id"}),
@@ -28,15 +28,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      }
  *  )
  * @ORM\Entity(
- *      repositoryClass="App\Repository\Service"
+ *      repositoryClass="App\Repository\ServiceType"
  *  )
  *
- * @JMS\XmlRoot("Service")
+ * @JMS\XmlRoot("ServiceType")
  *
  * @package App\Entity
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-class Service implements EntityInterface
+class ServiceType implements EntityInterface
 {
     // Traits
     use ORMBehaviors\Blameable;
@@ -47,8 +47,8 @@ class Service implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "Service",
-     *      "Service.id",
+     *      "ServiceType",
+     *      "ServiceType.id",
      *  })
      * @JMS\Type("string")
      *
@@ -66,8 +66,8 @@ class Service implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "Service",
-     *      "Service.name",
+     *      "ServiceType",
+     *      "ServiceType.name",
      *  })
      * @JMS\Type("string")
      *
@@ -91,8 +91,8 @@ class Service implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "Service",
-     *      "Service.description",
+     *      "ServiceType",
+     *      "ServiceType.description",
      *  })
      * @JMS\Type("string")
      *
@@ -110,18 +110,18 @@ class Service implements EntityInterface
      * @var ArrayCollection<Workshop>
      *
      * @JMS\Groups({
-     *      "Service.workshops",
+     *      "ServiceType.workshops",
      *  })
      * @JMS\Type("ArrayCollection<App\Entity\Workshop>")
      * @JMS\XmlList(entry = "Workshop")
      *
      * @ORM\ManyToMany(
      *      targetEntity="Workshop",
-     *      mappedBy="services",
+     *      mappedBy="serviceTypes",
      *      cascade={"all"},
      *  )
      * @ORM\JoinTable(
-     *      name="workshop_has_service"
+     *      name="workshop_has_service_type"
      *  )
      */
     private $workshops;
@@ -157,7 +157,7 @@ class Service implements EntityInterface
     /**
      * @param string $name
      *
-     * @return Service
+     * @return ServiceType
      */
     public function setName(string $name)
     {
@@ -177,7 +177,7 @@ class Service implements EntityInterface
     /**
      * @param string $description
      *
-     * @return Service
+     * @return ServiceType
      */
     public function setDescription(string $description = null)
     {
@@ -199,9 +199,9 @@ class Service implements EntityInterface
      *
      * @param   Workshop    $workshop
      *
-     * @return  Service
+     * @return  ServiceType
      */
-    public function addWorkshop(Workshop $workshop): Service
+    public function addWorkshop(Workshop $workshop): ServiceType
     {
         if (!$this->workshops->contains($workshop)) {
             $this->workshops->add($workshop);
@@ -216,9 +216,9 @@ class Service implements EntityInterface
      *
      * @param   Workshop    $workshop
      *
-     * @return  Service
+     * @return  ServiceType
      */
-    public function removeWorkshop(Workshop $workshop): Service
+    public function removeWorkshop(Workshop $workshop): ServiceType
     {
         if ($this->workshops->contains($workshop)) {
             $this->workshops->removeElement($workshop);
@@ -231,9 +231,9 @@ class Service implements EntityInterface
     /**
      * Method to remove all many-to-many workshop relations from service.
      *
-     * @return  Service
+     * @return  ServiceType
      */
-    public function clearWorkshops(): Service
+    public function clearWorkshops(): ServiceType
     {
         $this->workshops->clear();
 

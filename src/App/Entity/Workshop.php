@@ -127,26 +127,26 @@ class Workshop implements EntityInterface
     private $carBrands;
 
     /**
-     * Collection of workshop car brands
+     * Collection of workshop service types
      *
      * @var ArrayCollection<CarBrand>
      *
      * @JMS\Groups({
      *      "Workshop.services",
      *  })
-     * @JMS\Type("ArrayCollection<App\Entity\Service>")
-     * @JMS\XmlList(entry = "Service")
+     * @JMS\Type("ArrayCollection<App\Entity\ServiceType>")
+     * @JMS\XmlList(entry = "ServiceType")
      *
      * @ORM\ManyToMany(
-     *      targetEntity="Service",
+     *      targetEntity="ServiceType",
      *      inversedBy="workshops",
      *      cascade={"all"},
      *  )
      * @ORM\JoinTable(
-     *      name="workshop_has_service"
+     *      name="workshop_has_service_type"
      *  )
      */
-    private $services;
+    private $serviceTypes;
 
     /**
      * Workshop offers
@@ -175,7 +175,7 @@ class Workshop implements EntityInterface
         $this->id = Uuid::uuid4()->toString();
 
         $this->carBrands = new ArrayCollection();
-        $this->services = new ArrayCollection();
+        $this->serviceTypes = new ArrayCollection();
         $this->offers = new ArrayCollection();
     }
 
@@ -284,25 +284,25 @@ class Workshop implements EntityInterface
     }
 
     /**
-     * @return Collection|ArrayCollection<CarBrand>
+     * @return Collection|ArrayCollection<ServiceType>
      */
-    public function getServices(): Collection
+    public function getServiceTypes(): Collection
     {
-        return $this->services;
+        return $this->serviceTypes;
     }
 
     /**
      * Method to attach new workshop to car brand.
      *
-     * @param   Service $service
+     * @param   ServiceType $serviceType
      *
      * @return  Workshop
      */
-    public function addService(Service $service): Workshop
+    public function addService(ServiceType $serviceType): Workshop
     {
-        if (!$this->carBrands->contains($service)) {
-            $this->carBrands->add($service);
-            $service->addWorkshop($this);
+        if (!$this->serviceTypes->contains($serviceType)) {
+            $this->serviceTypes->add($serviceType);
+            $serviceType->addWorkshop($this);
         }
 
         return $this;
@@ -311,15 +311,15 @@ class Workshop implements EntityInterface
     /**
      * Method to remove specified workshop from car brand.
      *
-     * @param   Service $service
+     * @param   ServiceType $serviceType
      *
      * @return  Workshop
      */
-    public function removeService(Service $service): Workshop
+    public function removeService(ServiceType $serviceType): Workshop
     {
-        if ($this->services->contains($service)) {
-            $this->services->removeElement($service);
-            $service->removeWorkshop($this);
+        if ($this->serviceTypes->contains($serviceType)) {
+            $this->serviceTypes->removeElement($serviceType);
+            $serviceType->removeWorkshop($this);
         }
 
         return $this;
@@ -332,7 +332,7 @@ class Workshop implements EntityInterface
      */
     public function clearServices(): Workshop
     {
-        $this->services->clear();
+        $this->serviceTypes->clear();
 
         return $this;
     }

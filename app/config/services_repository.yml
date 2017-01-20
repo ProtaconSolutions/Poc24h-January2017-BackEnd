@@ -27,10 +27,10 @@ services:
         arguments: [ App\Entity\RequestLog ]
         class: App\Repository\RequestLog
 
-    repository.service:
+    repository.service_type:
         parent: repository
-        arguments: [ App\Entity\Service ]
-        class: App\Repository\Service
+        arguments: [ App\Entity\ServiceType ]
+        class: App\Repository\ServiceType
 
     repository.user:
         parent: repository
