@@ -9,6 +9,8 @@ namespace App\Entity;
 
 use App\Doctrine\Behaviours as ORMBehaviors;
 use App\Entity\Interfaces\EntityInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Ramsey\Uuid\Uuid;
@@ -35,7 +37,7 @@ use Ramsey\Uuid\Uuid;
  */
 class Workshop implements EntityInterface
 {
-// Traits
+    // Traits
     use ORMBehaviors\Blameable;
     use ORMBehaviors\Timestampable;
 
@@ -102,11 +104,35 @@ class Workshop implements EntityInterface
     private $description;
 
     /**
+     * Collection of workshop car brands
+     *
+     * @var ArrayCollection<CarBrand>
+     *
+     * @JMS\Groups({
+     *      "Workshop.carBrands",
+     *  })
+     * @JMS\Type("ArrayCollection<App\Entity\CarBrand>")
+     * @JMS\XmlList(entry = "CarBrand")
+     *
+     * @ORM\ManyToMany(
+     *      targetEntity="CarBrand",
+     *      inversedBy="workshops",
+     *      cascade={"all"},
+     *  )
+     * @ORM\JoinTable(
+     *      name="workshop_has_car_brand"
+     *  )
+     */
+    private $carBrands;
+
+    /**
      * Workshop constructor.
      */
     public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
+
+        $this->carBrands = new ArrayCollection();
     }
 
     /**
@@ -155,6 +181,60 @@ class Workshop implements EntityInterface
     public function setDescription(string $description = null)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArrayCollection<CarBrand>
+     */
+    public function getCarBrands(): Collection
+    {
+        return $this->carBrands;
+    }
+
+    /**
+     * Method to attach new workshop to car brand.
+     *
+     * @param   CarBrand    $carBrand
+     *
+     * @return  Workshop
+     */
+    public function addCarBrand(CarBrand $carBrand): Workshop
+    {
+        if (!$this->carBrands->contains($carBrand)) {
+            $this->carBrands->add($carBrand);
+            $carBrand->addUWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Method to remove specified workshop from car brand.
+     *
+     * @param   CarBrand    $carBrand
+     *
+     * @return  Workshop
+     */
+    public function removeCarBrand(CarBrand $carBrand): Workshop
+    {
+        if ($this->carBrands->contains($carBrand)) {
+            $this->carBrands->removeElement($carBrand);
+            $carBrand->removeWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Method to remove all many-to-many car brands relations from workshop.
+     *
+     * @return  Workshop
+     */
+    public function clearCarBrands(): Workshop
+    {
+        $this->carBrands->clear();
 
         return $this;
     }
