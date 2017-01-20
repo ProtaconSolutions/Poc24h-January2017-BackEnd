@@ -126,6 +126,28 @@ class Workshop implements EntityInterface
     private $carBrands;
 
     /**
+     * Collection of workshop car brands
+     *
+     * @var ArrayCollection<CarBrand>
+     *
+     * @JMS\Groups({
+     *      "Workshop.services",
+     *  })
+     * @JMS\Type("ArrayCollection<App\Entity\Service>")
+     * @JMS\XmlList(entry = "Service")
+     *
+     * @ORM\ManyToMany(
+     *      targetEntity="Service",
+     *      inversedBy="workshops",
+     *      cascade={"all"},
+     *  )
+     * @ORM\JoinTable(
+     *      name="workshop_has_service"
+     *  )
+     */
+    private $services;
+
+    /**
      * Workshop constructor.
      */
     public function __construct()
@@ -204,7 +226,7 @@ class Workshop implements EntityInterface
     {
         if (!$this->carBrands->contains($carBrand)) {
             $this->carBrands->add($carBrand);
-            $carBrand->addUWorkshop($this);
+            $carBrand->addWorkshop($this);
         }
 
         return $this;
@@ -235,6 +257,60 @@ class Workshop implements EntityInterface
     public function clearCarBrands(): Workshop
     {
         $this->carBrands->clear();
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArrayCollection<CarBrand>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    /**
+     * Method to attach new workshop to car brand.
+     *
+     * @param   Service $service
+     *
+     * @return  Workshop
+     */
+    public function addService(Service $service): Workshop
+    {
+        if (!$this->carBrands->contains($service)) {
+            $this->carBrands->add($service);
+            $service->addWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Method to remove specified workshop from car brand.
+     *
+     * @param   Service $service
+     *
+     * @return  Workshop
+     */
+    public function removeService(Service $service): Workshop
+    {
+        if ($this->services->contains($service)) {
+            $this->services->removeElement($service);
+            $service->removeWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Method to remove all many-to-many car brands relations from workshop.
+     *
+     * @return  Workshop
+     */
+    public function clearServices(): Workshop
+    {
+        $this->services->clear();
 
         return $this;
     }

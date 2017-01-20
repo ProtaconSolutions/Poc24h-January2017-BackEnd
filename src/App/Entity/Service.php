@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 /**
- * /src/App/Entity/CarBrand.php
+ * /src/App/Entity/Service.php
  *
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
@@ -16,10 +16,10 @@ use JMS\Serializer\Annotation as JMS;
 use Ramsey\Uuid\Uuid;
 
 /**
- * Author
+ * Class Service
  *
  * @ORM\Table(
- *      name="car_brand",
+ *      name="service",
  *      indexes={
  *          @ORM\Index(name="created_by_id", columns={"created_by_id"}),
  *          @ORM\Index(name="updated_by_id", columns={"updated_by_id"}),
@@ -27,15 +27,15 @@ use Ramsey\Uuid\Uuid;
  *      }
  *  )
  * @ORM\Entity(
- *      repositoryClass="App\Repository\CarBrand"
+ *      repositoryClass="App\Repository\Service"
  *  )
  *
- * @JMS\XmlRoot("CarBrand")
+ * @JMS\XmlRoot("Service")
  *
  * @package App\Entity
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-class CarBrand implements EntityInterface
+class Service implements EntityInterface
 {
     // Traits
     use ORMBehaviors\Blameable;
@@ -48,8 +48,8 @@ class CarBrand implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "CarBrand",
-     *      "CarBrand.id",
+     *      "Service",
+     *      "Service.id",
      *  })
      * @JMS\Type("string")
      *
@@ -69,8 +69,8 @@ class CarBrand implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "CarBrand",
-     *      "CarBrand.name",
+     *      "Service",
+     *      "Service.name",
      *  })
      * @JMS\Type("string")
      *
@@ -90,8 +90,8 @@ class CarBrand implements EntityInterface
      *
      * @JMS\Groups({
      *      "Default",
-     *      "CarBrand",
-     *      "CarBrand.description",
+     *      "Service",
+     *      "Service.description",
      *  })
      * @JMS\Type("string")
      *
@@ -104,29 +104,29 @@ class CarBrand implements EntityInterface
     private $description;
 
     /**
-     * Collection of car brand workshops
+     * Collection of service workshops
      *
      * @var ArrayCollection<Workshop>
      *
      * @JMS\Groups({
-     *      "CarBrand.workshops",
+     *      "Service.workshops",
      *  })
      * @JMS\Type("ArrayCollection<App\Entity\Workshop>")
      * @JMS\XmlList(entry = "Workshop")
      *
      * @ORM\ManyToMany(
      *      targetEntity="Workshop",
-     *      mappedBy="carBrands",
+     *      mappedBy="services",
      *      cascade={"all"},
      *  )
      * @ORM\JoinTable(
-     *      name="workshop_has_car_brand"
+     *      name="workshop_has_service"
      *  )
      */
     private $workshops;
 
     /**
-     * CarBrand constructor.
+     * Service constructor.
      */
     public function __construct()
     {
@@ -156,7 +156,7 @@ class CarBrand implements EntityInterface
     /**
      * @param string $name
      *
-     * @return CarBrand
+     * @return Service
      */
     public function setName(string $name)
     {
@@ -176,7 +176,7 @@ class CarBrand implements EntityInterface
     /**
      * @param string $description
      *
-     * @return CarBrand
+     * @return Service
      */
     public function setDescription(string $description = null)
     {
@@ -194,45 +194,45 @@ class CarBrand implements EntityInterface
     }
 
     /**
-     * Method to attach new workshop to car brand.
+     * Method to attach new workshop to service.
      *
      * @param   Workshop    $workshop
      *
-     * @return  CarBrand
+     * @return  Service
      */
-    public function addWorkshop(Workshop $workshop): CarBrand
+    public function addWorkshop(Workshop $workshop): Service
     {
         if (!$this->workshops->contains($workshop)) {
             $this->workshops->add($workshop);
-            $workshop->addCarBrand($this);
+            $workshop->addService($this);
         }
 
         return $this;
     }
 
     /**
-     * Method to remove specified workshop from car brand.
+     * Method to remove specified workshop from service.
      *
      * @param   Workshop    $workshop
      *
-     * @return  CarBrand
+     * @return  Service
      */
-    public function removeWorkshop(Workshop $workshop): CarBrand
+    public function removeWorkshop(Workshop $workshop): Service
     {
         if ($this->workshops->contains($workshop)) {
             $this->workshops->removeElement($workshop);
-            $workshop->removeCarBrand($this);
+            $workshop->removeService($this);
         }
 
         return $this;
     }
 
     /**
-     * Method to remove all many-to-many workshop relations from car brand.
+     * Method to remove all many-to-many workshop relations from service.
      *
-     * @return  CarBrand
+     * @return  Service
      */
-    public function clearWorkshops(): CarBrand
+    public function clearWorkshops(): Service
     {
         $this->workshops->clear();
 
