@@ -7,25 +7,30 @@ services:
         factory: [ '@doctrine.orm.entity_manager', getRepository ]
         shared: false
 
-    repository.author:
+    repository.car_brand:
         parent: repository
-        arguments: [ App\Entity\Author ]
-        class: App\Repository\Author
+        arguments: [ App\Entity\CarBrand ]
+        class: App\Repository\CarBrand
 
     repository.date_dimension:
         parent: repository
         arguments: [ App\Entity\DateDimension ]
         class: App\Repository\DateDimension
 
-    repository.book:
+    repository.offer:
         parent: repository
-        arguments: [ App\Entity\Book ]
-        class: App\Repository\Book
+        arguments: [ App\Entity\Offer ]
+        class: App\Repository\Offer
 
     repository.request_log:
         parent: repository
         arguments: [ App\Entity\RequestLog ]
         class: App\Repository\RequestLog
+
+    repository.service:
+        parent: repository
+        arguments: [ App\Entity\Service ]
+        class: App\Repository\Service
 
     repository.user:
         parent: repository
@@ -41,3 +46,8 @@ services:
         parent: repository
         arguments: [ App\Entity\UserLogin ]
         class: App\Repository\UserLogin
+
+    repository.workshop:
+        parent: repository
+        arguments: [ App\Entity\Workshop ]
+        class: App\Repository\Workshop

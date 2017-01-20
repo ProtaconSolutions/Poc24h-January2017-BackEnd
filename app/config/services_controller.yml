@@ -3,14 +3,6 @@ services:
         class:      App\Controller\AuthController
         arguments:  [ '@security.token_storage', '@jms_serializer', '@app.services.rest.helper.response' ]
 
-    app.controller.author:
-        class:      App\Controller\AuthorController
-        arguments:  [ '@app.services.rest.author', '@app.services.rest.helper.response' ]
-
-    app.controller.book:
-        class:      App\Controller\BookController
-        arguments:  [ '@app.services.rest.book', '@app.services.rest.helper.response' ]
-
     app.controller.user:
         class:      App\Controller\UserController
         arguments:  [ '@app.services.rest.user', '@app.services.rest.helper.response' ]

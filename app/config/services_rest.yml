@@ -3,17 +3,21 @@ services:
         class: App\Services\Rest\Helper\Response
         arguments: [ '@serializer' ]
 
-    app.services.rest.author:
-        class: App\Services\Rest\Author
-        arguments: [ '@repository.author', '@validator' ]
+    app.services.rest.car_brand:
+        class: App\Services\Rest\CarBrand
+        arguments: [ '@repository.car_brand', '@validator' ]
 
-    app.services.rest.book:
-        class: App\Services\Rest\Book
-        arguments: [ '@repository.book', '@validator' ]
+    app.services.rest.offer:
+        class: App\Services\Rest\Offer
+        arguments: [ '@repository.offer', '@validator' ]
 
     app.services.rest.request_log:
         class: App\Services\Rest\RequestLog
         arguments: [ '@repository.request_log', '@validator' ]
+
+    app.services.rest.service:
+        class: App\Services\Rest\Service
+        arguments: [ '@repository.service', '@validator' ]
 
     app.services.rest.user:
         class: App\Services\Rest\User
@@ -26,3 +30,7 @@ services:
     app.services.rest.user_login:
         class: App\Services\Rest\UserLogin
         arguments: [ '@repository.user_login', '@validator' ]
+
+    app.services.rest.workshop:
+        class: App\Services\Rest\Workshop
+        arguments: [ '@repository.workshop', '@validator' ]

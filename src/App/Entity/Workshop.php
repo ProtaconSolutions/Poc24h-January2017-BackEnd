@@ -148,6 +148,25 @@ class Workshop implements EntityInterface
     private $services;
 
     /**
+     * Workshop offers
+     *
+     * @var ArrayCollection<UserLogin>
+     *
+     * @JMS\Groups({
+     *      "User.userLogin",
+     *  })
+     * @JMS\Type("ArrayCollection<App\Entity\Offer>")
+     * @JMS\XmlList(entry = "userLogin")
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Offer",
+     *      mappedBy="workshop",
+     *      cascade={"all"},
+     *  )
+     */
+    private $offers;
+
+    /**
      * Workshop constructor.
      */
     public function __construct()
@@ -155,6 +174,8 @@ class Workshop implements EntityInterface
         $this->id = Uuid::uuid4()->toString();
 
         $this->carBrands = new ArrayCollection();
+        $this->services = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -313,5 +334,13 @@ class Workshop implements EntityInterface
         $this->services->clear();
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOffers(): ArrayCollection
+    {
+        return $this->offers;
     }
 }
