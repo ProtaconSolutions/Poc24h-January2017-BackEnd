@@ -3,6 +3,10 @@ services:
         class:      App\Controller\AuthController
         arguments:  [ '@security.token_storage', '@jms_serializer', '@app.services.rest.helper.response' ]
 
+    app.controller.service_type:
+        class:      App\Controller\ServiceTypeController
+        arguments:  [ '@app.services.rest.service_type', '@app.services.rest.helper.response' ]
+
     app.controller.user:
         class:      App\Controller\UserController
         arguments:  [ '@app.services.rest.user', '@app.services.rest.helper.response' ]

@@ -59,6 +59,7 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+            anonymous: true
 
     role_hierarchy:
         ROLE_USER:    [ROLE_LOGGED]
