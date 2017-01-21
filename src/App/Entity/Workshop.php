@@ -49,6 +49,8 @@ class Workshop implements EntityInterface
      *      "Default",
      *      "Workshop",
      *      "Workshop.id",
+     *      "Offer",
+     *      "Offer.workshop",
      *  })
      * @JMS\Type("string")
      *

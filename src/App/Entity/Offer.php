@@ -140,6 +140,10 @@ class Offer implements EntityInterface
      *      "Offer",
      *  })
      *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\GreaterThan(0)
+     *
      * @ORM\Column(
      *      name="price",
      *      type="decimal",
