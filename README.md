@@ -177,6 +177,8 @@ Please see the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file for guidelines.
 
 # Authors
 [Tarmo Leppänen](https://github.com/tarlepp)
+[Antti Nevala](https://github.com/aeosys)
+[Tuomo Moilanen](https://github.com/???)
 
 # LICENSE
 [The MIT License (MIT)](LICENSE)
