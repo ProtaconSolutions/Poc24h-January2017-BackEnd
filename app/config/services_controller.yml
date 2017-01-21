@@ -3,6 +3,10 @@ services:
         class:      App\Controller\AuthController
         arguments:  [ '@security.token_storage', '@jms_serializer', '@app.services.rest.helper.response' ]
 
+    app.controller.car_brand:
+        class:      App\Controller\CarBrandController
+        arguments:  [ '@app.services.rest.car_brand', '@app.services.rest.helper.response' ]
+
     app.controller.offer:
         class:      App\Controller\OfferController
         arguments:  [ '@app.services.rest.offer', '@app.services.rest.helper.response' ]
