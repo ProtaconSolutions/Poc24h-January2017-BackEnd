@@ -16,3 +16,7 @@ services:
     app.controller.user_group:
         class:      App\Controller\UserGroupController
         arguments:  [ '@app.services.rest.user_group', '@app.services.rest.helper.response' ]
+
+    app.controller.workshop:
+        class:      App\Controller\WorkshopController
+        arguments:  [ '@app.services.rest.workshop', '@app.services.rest.helper.response' ]
