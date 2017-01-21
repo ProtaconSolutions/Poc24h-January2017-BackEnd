@@ -1,7 +1,7 @@
 # What is this?
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Build Status](https://travis-ci.org/tarlepp/symfony-backend.png?branch=master)](https://travis-ci.org/tarlepp/symfony-backend)
-[![Coverage Status](https://coveralls.io/repos/github/tarlepp/symfony-backend/badge.svg?branch=master)](https://coveralls.io/github/tarlepp/symfony-backend?branch=master)
+[![Build Status](https://travis-ci.org/ProtaconSolutions/Poc24h-January2017-BackEnd.png?branch=master)](https://travis-ci.org/ProtaconSolutions/Poc24h-January2017-BackEnd)
+[![Coverage Status](https://coveralls.io/repos/github/ProtaconSolutions/Poc24h-January2017-BackEnd/badge.svg?branch=master)](https://coveralls.io/github/ProtaconSolutions/Poc24h-January2017-BackEnd?branch=master)
 
 Simple JSON API which is build on top of [Symfony](https://symfony.com/) framework.
 
@@ -181,4 +181,4 @@ Please see the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file for guidelines.
 # LICENSE
 [The MIT License (MIT)](LICENSE)
 
-Copyright (c) 2017 Tarmo Leppänen
+Copyright (c) 2017 Protacon Solutions
