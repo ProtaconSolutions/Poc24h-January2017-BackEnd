@@ -35,20 +35,7 @@ Table of Contents
 * JWT authentication
 * API documentation
 
-## TODO
-- [x] Configuration for each environment and/or developer
-- [x] Authentication via JWT
-- [x] CORS support
-- [ ] "Automatic" API doc generation (Swagger)
-- [x] Database connection (Doctrine dbal + orm)
-- [x] Console tools (dbal, migrations, orm)
-- [x] Docker support
-- [x] Logger (monolog) 
-- [x] TravisCI tests
-- [x] Make tests, every endpoint
-- [ ] Docs - Generic 
-- [ ] Docs - New api endpoint 
-- [ ] Docs - New REST service
+## TODO - update this list
 - [ ] And _everything_ else...
 
 # Requirements
