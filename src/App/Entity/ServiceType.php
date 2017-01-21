@@ -205,7 +205,7 @@ class ServiceType implements EntityInterface
     {
         if (!$this->workshops->contains($workshop)) {
             $this->workshops->add($workshop);
-            $workshop->addService($this);
+            $workshop->addServiceType($this);
         }
 
         return $this;
@@ -222,7 +222,7 @@ class ServiceType implements EntityInterface
     {
         if ($this->workshops->contains($workshop)) {
             $this->workshops->removeElement($workshop);
-            $workshop->removeService($this);
+            $workshop->removeServiceType($this);
         }
 
         return $this;

@@ -300,7 +300,7 @@ class Workshop implements EntityInterface
      *
      * @return  Workshop
      */
-    public function addService(ServiceType $serviceType): Workshop
+    public function addServiceType(ServiceType $serviceType): Workshop
     {
         if (!$this->serviceTypes->contains($serviceType)) {
             $this->serviceTypes->add($serviceType);
@@ -317,7 +317,7 @@ class Workshop implements EntityInterface
      *
      * @return  Workshop
      */
-    public function removeService(ServiceType $serviceType): Workshop
+    public function removeServiceType(ServiceType $serviceType): Workshop
     {
         if ($this->serviceTypes->contains($serviceType)) {
             $this->serviceTypes->removeElement($serviceType);
@@ -332,7 +332,7 @@ class Workshop implements EntityInterface
      *
      * @return  Workshop
      */
-    public function clearServices(): Workshop
+    public function clearServiceTypes(): Workshop
     {
         $this->serviceTypes->clear();
 
