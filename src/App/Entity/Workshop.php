@@ -113,7 +113,7 @@ class Workshop implements EntityInterface
      *      "Workshop.carBrands",
      *  })
      * @JMS\Type("ArrayCollection<App\Entity\CarBrand>")
-     * @JMS\XmlList(entry = "CarBrand")
+     * @JMS\XmlList(entry = "CarBrands")
      *
      * @ORM\ManyToMany(
      *      targetEntity="CarBrand",
@@ -129,13 +129,13 @@ class Workshop implements EntityInterface
     /**
      * Collection of workshop service types
      *
-     * @var ArrayCollection<CarBrand>
+     * @var ArrayCollection<ServiceType>
      *
      * @JMS\Groups({
-     *      "Workshop.services",
+     *      "Workshop.serviceTypes",
      *  })
      * @JMS\Type("ArrayCollection<App\Entity\ServiceType>")
-     * @JMS\XmlList(entry = "ServiceType")
+     * @JMS\XmlList(entry = "serviceType")
      *
      * @ORM\ManyToMany(
      *      targetEntity="ServiceType",
@@ -154,10 +154,10 @@ class Workshop implements EntityInterface
      * @var ArrayCollection<UserLogin>
      *
      * @JMS\Groups({
-     *      "User.userLogin",
+     *      "Workshop.offers",
      *  })
      * @JMS\Type("ArrayCollection<App\Entity\Offer>")
-     * @JMS\XmlList(entry = "userLogin")
+     * @JMS\XmlList(entry = "Offer")
      *
      * @ORM\OneToMany(
      *      targetEntity="App\Entity\Offer",
