@@ -10,6 +10,8 @@ services:
     app.services.rest.offer:
         class: App\Services\Rest\Offer
         arguments: [ '@repository.offer', '@validator' ]
+        calls:
+          - [ setWorkshopService, [ '@app.services.rest.workshop' ] ]
 
     app.services.rest.request_log:
         class: App\Services\Rest\RequestLog
