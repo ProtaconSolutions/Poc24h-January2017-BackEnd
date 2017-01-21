@@ -12,6 +12,7 @@ use App\Repository\UserGroup as Repository;
 use Doctrine\Common\Persistence\Proxy;
 
 // Note that these are just for the class PHPDoc block
+/** @noinspection UnknownInspectionInspection */
 /** @noinspection PhpHierarchyChecksInspection */
 /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
 
