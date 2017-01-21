@@ -66,6 +66,9 @@ abstract class EntityTestCase extends KernelTestCase
             case 'integer':
                 $value = 666;
                 break;
+            case 'float':
+                $value = 6.66;
+                break;
             case \DateTime::class:
                 $value = new \DateTime();
                 break;
@@ -105,6 +108,7 @@ abstract class EntityTestCase extends KernelTestCase
         switch ($type) {
             case 'CustomClass':
             case 'integer':
+            case 'float':
             case \DateTime::class:
             case 'string':
             case 'array':
@@ -564,6 +568,9 @@ abstract class EntityTestCase extends KernelTestCase
                 case 'date':
                 case 'datetime':
                     $type = \DateTime::class;
+                    break;
+                case 'decimal':
+                    $type = 'float';
                     break;
                 case 'text':
                 case 'string':

@@ -27,7 +27,7 @@ class RepositoryTest extends KernelTestCase
     public function testThatAllRepositoriesHaveTestClass($repository)
     {
         $testFile = str_replace(['App\\', '\\'], ['AppBundle\\functional\\', '/'], $repository);
-        $testFile = __DIR__ . '/../tests/' . $testFile . 'Test.php';
+        $testFile = __DIR__ . '/../../../tests/' . $testFile . 'Test.php';
 
         $message = sprintf(
             "Repository '%s' doesn't have required test class, please create it to '%s'.",

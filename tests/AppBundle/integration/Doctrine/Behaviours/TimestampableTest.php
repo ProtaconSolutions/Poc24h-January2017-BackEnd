@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\integration\Doctrine\Behaviours;
 
-use App\Entity\Author;
+use App\Entity\CarBrand;
 use App\Tests\EntityTestCase;
 
 /**
@@ -14,14 +14,14 @@ use App\Tests\EntityTestCase;
 class TimestampableTest extends EntityTestCase
 {
     /**
-     * @var Author
+     * @var CarBrand
      */
     protected $entity;
 
     /**
      * @var string
      */
-    protected $entityName = Author::class;
+    protected $entityName = CarBrand::class;
 
     public function testThatGetCreatedAtJsonReturnsExpected()
     {
