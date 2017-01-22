@@ -56,7 +56,8 @@
         "symfony/monolog-bundle": "3.0.3",
         "symfony/swiftmailer-bundle": "2.4.2",
         "symfony/symfony": "3.2.2",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "box/spout": "2.7.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.3",
