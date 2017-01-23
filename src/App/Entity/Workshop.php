@@ -316,6 +316,30 @@ class Workshop implements EntityInterface
     }
 
     /**
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.rating",
+     *  })
+     * @JMS\VirtualProperty
+     *
+     * @return float
+     */
+    public function getRating(): float
+    {
+        $output = random_int(8, 10);
+        $bits = [0, 0.5];
+
+        if ($output !== 10) {
+            $output += $bits[array_rand($bits)];
+        } else {
+            $output -= $bits[array_rand($bits)];
+        }
+
+        return (float)$output;
+    }
+
+    /**
      * Get id
      *
      * @return string
