@@ -84,6 +84,9 @@ class DataImportCommand extends ContainerAwareCommand
         /** @var Base $entityClass */
         $entityClass = '\\App\\Entity\\' . $input->getArgument('entity');
 
+        // Remove current rows
+        $em->createQuery('DELETE FROM ' . $entityClass)->execute();
+
         /** @var SheetInterface $sheet */
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $key => $row) {
@@ -96,6 +99,8 @@ class DataImportCommand extends ContainerAwareCommand
 
                     foreach (array_combine($header, $row) as $property => $value) {
                         $method = 'set' . ucfirst($property);
+
+                        $value = $this->formatValue($property, (string)$value);
 
                         if (method_exists($entity, $method)) {
                             $entity->$method($value);
@@ -116,6 +121,43 @@ class DataImportCommand extends ContainerAwareCommand
 
         $em->flush();
 
+        $message = sprintf(
+            "All done created total of '%d' %s entities.",
+            $count,
+            $entityClass
+        );
+
+        $this->io->success($message);
+
         return 0;
+    }
+
+    /**
+     * Simple formatter method for input data.
+     *
+     * @param   string  $property
+     * @param   string  $value
+     *
+     * @return  string
+     */
+    private function formatValue(string $property, string $value): string
+    {
+        switch ($property) {
+            case 'postalCode':
+                $value = str_pad($value, 5, '0', STR_PAD_LEFT);
+                break;
+            case 'phone':
+                $value = ltrim($value, '0');
+                break;
+        }
+
+        // Hack to remove all trailing non-ascii whitespaces
+        if (preg_match_all('/\p{L}/u', $value, $matches, PREG_OFFSET_CAPTURE) > 0) {
+            $lastMatch = $matches[0][count($matches[0]) - 1];
+
+            $value = mb_substr($value, 0, $lastMatch[1] + 1);
+        }
+
+        return trim(preg_replace('/\s+/', '', $value));
     }
 }
