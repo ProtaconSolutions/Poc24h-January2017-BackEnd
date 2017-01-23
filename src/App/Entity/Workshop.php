@@ -94,6 +94,117 @@ class Workshop implements EntityInterface
      * @JMS\Groups({
      *      "Default",
      *      "Workshop",
+     *      "Workshop.email",
+     *  })
+     * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\Email()
+     *
+     * @ORM\Column(
+     *      name="email",
+     *      type="string",
+     *      length=255,
+     *      nullable=false
+     *  )
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.phone",
+     *  })
+     * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(
+     *      name="phone",
+     *      type="string",
+     *      length=255,
+     *      nullable=false
+     *  )
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.city",
+     *  })
+     * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(
+     *      name="city",
+     *      type="string",
+     *      length=255,
+     *      nullable=false
+     *  )
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.postalCode",
+     *  })
+     * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(
+     *      name="postal_code",
+     *      type="string",
+     *      length=255,
+     *      nullable=false
+     *  )
+     */
+    private $postalCode;
+
+    /**
+     * @var string
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.address",
+     *  })
+     * @JMS\Type("string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(
+     *      name="address",
+     *      type="string",
+     *      length=255,
+     *      nullable=false
+     *  )
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
      *      "Workshop.description",
      *  })
      * @JMS\Type("string")
@@ -345,5 +456,105 @@ class Workshop implements EntityInterface
     public function getOffers(): ArrayCollection
     {
         return $this->offers;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return Workshop
+     */
+    public function setEmail(string $email): Workshop
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return Workshop
+     */
+    public function setPhone(string $phone): Workshop
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return Workshop
+     */
+    public function setCity(string $city): Workshop
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param string $postalCode
+     *
+     * @return Workshop
+     */
+    public function setPostalCode(string $postalCode): Workshop
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     *
+     * @return Workshop
+     */
+    public function setAddress(string $address): Workshop
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }
