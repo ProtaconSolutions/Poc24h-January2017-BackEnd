@@ -10,6 +10,7 @@ namespace App\Controller;
 use App\Entity\CarBrand;
 use App\Entity\ServiceType;
 use App\Entity\Workshop;
+use App\Services\Rest\Workshop as WorkshopService;
 use App\Traits\Rest\Roles as RestAction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -25,6 +26,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *      service="app.controller.workshop",
  *      path="/workshop",
  *  )
+ *
+ * @method WorkshopService getResourceService()
  *
  * @package App\Controller
  * @author  TLe, Tarmo Leppänen <tarmo.leppanen@protacon.com>
@@ -252,5 +255,24 @@ class WorkshopController extends RestController
         $this->getResourceService()->save($workshop);
 
         return $this->getResponseService()->createResponse($request, $workshop, 200);
+    }
+
+    /**
+     * @Route("/cities")
+     * @Route("/cities/")
+     *
+     * @Method({"GET"})
+     *
+     * @throws  \Symfony\Component\HttpKernel\Exception\HttpException
+     *
+     * @param   Request $request
+     *
+     * @return  \Symfony\Component\HttpFoundation\Response
+     */
+    public function cities(Request $request)
+    {
+        $cities = $this->getResourceService()->getRepository()->getCities();
+
+        return $this->getResponseService()->createResponse($request, $cities, 200);
     }
 }

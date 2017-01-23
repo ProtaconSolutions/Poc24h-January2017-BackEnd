@@ -16,4 +16,22 @@ namespace App\Repository;
 class Workshop extends Base
 {
     // Implement custom entity query methods here
+
+    /**
+     * Repository method to return unique workshop cities
+     *
+     * @return array
+     */
+    public function getCities(): array
+    {
+        // Build query
+        $query = $this
+            ->createQueryBuilder('w')
+            ->select('w.city')
+            ->orderBy('w.city')
+            ->groupBy('w.city')
+        ;
+
+        return array_map('current', $query->getQuery()->getArrayResult());
+    }
 }
