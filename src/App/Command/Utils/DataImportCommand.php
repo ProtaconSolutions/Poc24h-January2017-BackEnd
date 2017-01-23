@@ -107,6 +107,12 @@ class DataImportCommand extends ContainerAwareCommand
                         }
                     }
 
+                    if ($entityClass === '\\App\\Entity\\Workshop') {
+                        $distance = (float)(random_int(1, 10) . '.' . random_int(0, 10));
+
+                        $entity->setDistance($distance);
+                    }
+
                     $em->persist($entity);
                 }
 

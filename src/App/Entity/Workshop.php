@@ -218,6 +218,29 @@ class Workshop implements EntityInterface
     private $description;
 
     /**
+     * @var float
+     *
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.distance",
+     *  })
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     * @Assert\GreaterThan(0)
+     *
+     * @ORM\Column(
+     *      name="distance",
+     *      type="decimal",
+     *      precision=12,
+     *      scale=2,
+     *      nullable=true,
+     *  )
+     */
+    private $distance = 0;
+
+    /**
      * Collection of workshop car brands
      *
      * @var ArrayCollection<CarBrand>
@@ -554,6 +577,26 @@ class Workshop implements EntityInterface
     public function setAddress(string $address): Workshop
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDistance(): float
+    {
+        return $this->distance;
+    }
+
+    /**
+     * @param float $distance
+     *
+     * @return Workshop
+     */
+    public function setDistance(float $distance): Workshop
+    {
+        $this->distance = $distance;
 
         return $this;
     }

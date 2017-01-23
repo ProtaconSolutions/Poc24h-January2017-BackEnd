@@ -183,7 +183,7 @@ class Offer implements EntityInterface
      *
      * @return Offer
      */
-    public function setWorkshop(Workshop $workshop)
+    public function setWorkshop(Workshop $workshop): Offer
     {
         $this->workshop = $workshop;
 
@@ -203,7 +203,7 @@ class Offer implements EntityInterface
      *
      * @return Offer
      */
-    public function setName(string $name)
+    public function setName(string $name): Offer
     {
         $this->name = $name;
 
@@ -223,7 +223,7 @@ class Offer implements EntityInterface
      *
      * @return Offer
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): Offer
     {
         $this->description = $description;
 
@@ -243,7 +243,7 @@ class Offer implements EntityInterface
      *
      * @return Offer
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): Offer
     {
         $this->price = $price;
 
