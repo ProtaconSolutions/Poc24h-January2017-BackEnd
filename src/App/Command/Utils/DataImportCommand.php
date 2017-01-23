@@ -158,6 +158,6 @@ class DataImportCommand extends ContainerAwareCommand
             $value = mb_substr($value, 0, $lastMatch[1] + 1);
         }
 
-        return trim(preg_replace('/\s+/', '', $value));
+        return trim($value);
     }
 }
