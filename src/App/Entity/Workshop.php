@@ -340,6 +340,21 @@ class Workshop implements EntityInterface
     }
 
     /**
+     * @JMS\Groups({
+     *      "Default",
+     *      "Workshop",
+     *      "Workshop.ratingCount",
+     *  })
+     * @JMS\VirtualProperty
+     *
+     * @return integer
+     */
+    public function getRatingCount(): int
+    {
+        return random_int(6, 16);
+    }
+
+    /**
      * Get id
      *
      * @return string
