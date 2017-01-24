@@ -70,8 +70,6 @@ class Offer implements EntityInterface
      *  })
      * @JMS\Type("App\Entity\Workshop")
      *
-     * @Assert\NotNull()
-     *
      * @ORM\ManyToOne(
      *      targetEntity="App\Entity\Workshop",
      *      inversedBy="offers",
